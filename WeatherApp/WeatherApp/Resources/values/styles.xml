@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <color name="blueF">#004d87</color>
+<style name="Theme.Splash" parent="Theme.AppCompat.Light.DarkActionBar">
+  <item name="android:windowBackground">@color/blueF</item>
+  <item name="android:windowNoTitle">true</item>
+  <item name="android:windowFullscreen">true</item>
+</style>
+
+</resources>
