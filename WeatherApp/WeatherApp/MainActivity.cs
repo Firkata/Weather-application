@@ -15,7 +15,7 @@ using WeatherApp.Custom;
 
 namespace WeatherApp
 {
-    [Activity(Label = "WeatherApp")]//, MainLauncher = true
+    [Activity(Label = "WeatherApp", Theme = "@style/AppTheme")]//, MainLauncher = true
     public class MainActivity : Activity
     {
         TextView currentTemp;
@@ -39,7 +39,7 @@ namespace WeatherApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            ActionBar.Hide();
+            //ActionBar.Hide();
             //DataExtractor extractor = new DataExtractor();
             //var fiveDaysForecast = extractor.FiveDayForecast();
             //var halfDayForecast = extractor.HalfDayForecast();
