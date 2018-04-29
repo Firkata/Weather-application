@@ -91,7 +91,14 @@
     android:layout_height="200dp"
     android:layout_marginLeft="30dp"
     android:layout_marginTop="40dp"/>
-
+      <TextView
+          android:id="@+id/increasing_percentage"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="80dp"
+          android:layout_marginLeft="70dp"
+          android:textColor="@android:color/white"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/windmills_layout"
