@@ -12,6 +12,7 @@ using WeatherApp.Views;
 using Android.Views.Animations;
 using Android.Content;
 using WeatherApp.Custom;
+using Android.Animation;
 
 namespace WeatherApp
 {
@@ -22,6 +23,7 @@ namespace WeatherApp
         TextView minTemp;
         TextView maxTemp;
         TextView weatherPhrase;
+        TextView percentageIncrease;
         ImageView windmillBigTop;
         ImageView windmillBigBottom;
         ImageView windmillSmallTop;
@@ -78,15 +80,28 @@ namespace WeatherApp
             windmillSmallTop.StartAnimation(animation2);
 
             Circle circle = FindViewById<Circle>(Resource.Id.circle);
-            
+
             CircleAngleAnimation circleAnimation = new CircleAngleAnimation(circle, 300);
             circleAnimation.Duration = 4000;
             circle.StartAnimation(circleAnimation);
 
-
+            percentageIncrease = FindViewById<TextView>(Resource.Id.increasing_percentage);
+            StartCountAnimation();
             SetBackgroundImage();
         }
-        
+
+
+        private void StartCountAnimation()
+        {
+            ValueAnimator animator = ValueAnimator.OfInt(0, 600);
+            animator.SetDuration(4000);
+            animator.Start();
+            animator.Update += (object sender, ValueAnimator.AnimatorUpdateEventArgs e) =>
+            {
+                int newValue = (int)e.Animation.AnimatedValue;
+                percentageIncrease.Text = Convert.ToString(newValue);
+            };
+        }
 
         private List<HourlyForecastModel> HalfDayForecast()//(List<HourlyForecast> halfDayForecast)
         {
@@ -96,7 +111,7 @@ namespace WeatherApp
                 HourlyForecastModel hourlyForecast = new HourlyForecastModel();
 
                 hourlyForecast.Id = i;
-                hourlyForecast.Hour = 12+i+":00";//halfDayForecast[i].DateTime.Hour;
+                hourlyForecast.Hour = 12 + i + ":00";//halfDayForecast[i].DateTime.Hour;
                 hourlyForecast.ImageResource = Resource.Drawable.clouds;
                 hourlyForecast.Degrees = "19" + "\u00B0";//string.Format("{0},{1}", halfDayForecast[i].RealFeelTemperature.Maximum.Value.ToString(),"\u00B0");
 
@@ -121,7 +136,7 @@ namespace WeatherApp
                     //    CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
 
                     dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                        19+i,
+                        19 + i,
                         "April");
                 }
                 else
@@ -155,9 +170,9 @@ namespace WeatherApp
                 //    "\u00B0");
 
                 dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
-                    20+i,
+                    20 + i,
                     "\u00B0",
-                    7+i,
+                    7 + i,
                     "\u00B0");
 
                 list.Add(dailyForecast);
