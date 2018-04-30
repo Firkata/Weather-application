@@ -116,7 +116,7 @@ namespace WeatherApp
             animator.Update += (object sender, ValueAnimator.AnimatorUpdateEventArgs e) =>
             {
                 int newValue = (int)e.Animation.AnimatedValue;
-                percentageIncrease.Text = Convert.ToString(newValue);
+                percentageIncrease.Text = Convert.ToString(newValue) + "%";
             };
         }
 
