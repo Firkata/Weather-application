@@ -17,11 +17,14 @@
     <ImageView
         android:id="@+id/hourly_forecast_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
     <TextView
       android:id="@+id/hourly_forecast_degrees"
       android:textAppearance="?android:attr/textAppearanceSmall"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"/>
   </LinearLayout>
 </FrameLayout>
