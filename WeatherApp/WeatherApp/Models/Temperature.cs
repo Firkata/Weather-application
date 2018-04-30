@@ -2,7 +2,8 @@
 {
     public class Temperature
     {
-        public Minimum Minimum { get; set; }
-        public Maximum Maximum { get; set; }
+        public double Value { get; set; }
+        public string Unit { get; set; }
+        public int UnitType { get; set; }
     }
 }

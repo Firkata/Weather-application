@@ -2,7 +2,8 @@
 {
     public class RealFeelTemperature
     {
-        public Minimum2 Minimum { get; set; }
-        public Maximum2 Maximum { get; set; }
+        public double Value { get; set; }
+        public string Unit { get; set; }
+        public int UnitType { get; set; }
     }
 }

@@ -42,14 +42,14 @@ namespace WeatherApp
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             //ActionBar.Hide();
-            //DataExtractor extractor = new DataExtractor();
+            DataExtractor extractor = new DataExtractor();
             //var fiveDaysForecast = extractor.FiveDayForecast();
-            //var halfDayForecast = extractor.HalfDayForecast();
+            var halfDayForecast = extractor.HalfDayForecast();
             windmillBigTop = FindViewById<ImageView>(Resource.Id.windmill_big_top);
             windmillBigBottom = FindViewById<ImageView>(Resource.Id.windmill_big_bottom);
             windmillSmallTop = FindViewById<ImageView>(Resource.Id.windmill_small_top);
             windmillSmallBottom = FindViewById<ImageView>(Resource.Id.windmill_small_bottom);
-            hfCollection = new HourlyForecastCollection(HalfDayForecast());
+            hfCollection = new HourlyForecastCollection(HalfDayForecast(halfDayForecast));
             currentTemp = FindViewById<TextView>(Resource.Id.current_temp);
             minTemp = FindViewById<TextView>(Resource.Id.min_temp);
             maxTemp = FindViewById<TextView>(Resource.Id.max_temp);
@@ -120,17 +120,17 @@ namespace WeatherApp
             };
         }
 
-        private List<HourlyForecastModel> HalfDayForecast()//(List<HourlyForecast> halfDayForecast)
+        private List<HourlyForecastModel> HalfDayForecast(List<HourlyForecast> halfDayForecast)
         {
             List<HourlyForecastModel> list = new List<HourlyForecastModel>();
-            for (int i = 1; i < 13; i++)
+            for (int i = 0; i < 11; i++)
             {
                 HourlyForecastModel hourlyForecast = new HourlyForecastModel();
 
                 hourlyForecast.Id = i;
-                hourlyForecast.Hour = 12 + i + ":00";//halfDayForecast[i].DateTime.Hour;
+                hourlyForecast.Hour = halfDayForecast[i].DateTime.Hour + ":00";
                 hourlyForecast.ImageResource = Resource.Drawable.clouds;
-                hourlyForecast.Degrees = "19" + "\u00B0";//string.Format("{0},{1}", halfDayForecast[i].RealFeelTemperature.Maximum.Value.ToString(),"\u00B0");
+                hourlyForecast.Degrees = string.Format("{0}{1}", Math.Round(halfDayForecast[i].Temperature.Value).ToString(),"\u00B0");
 
                 list.Add(hourlyForecast);
             }
