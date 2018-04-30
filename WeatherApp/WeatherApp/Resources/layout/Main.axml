@@ -3,225 +3,255 @@
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/main_layout">
-    <TextView
-        android:id="@+id/current_city"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="Sofia"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
     <RelativeLayout
-        android:id="@+id/current_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/current_city"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        android:layout_centerHorizontal="true">
-      <TextView
-          android:id="@+id/current_temp"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:textColor="@android:color/white"
-          android:text="27"
-          android:textSize="80sp"
-          android:layout_centerHorizontal="true"/>
-      <TextView
-          android:id="@+id/weather_phrase"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:textColor="@android:color/white"
-          android:text="Sunny"
-          android:textSize="20sp"
-          android:layout_centerHorizontal="true"
-          android:layout_below="@id/current_temp"
-          android:layout_marginTop="5dp" />
-      <LinearLayout
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:layout_below="@id/weather_phrase"
-          android:layout_centerHorizontal="true">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_layout">
         <TextView
-            android:id="@+id/max_temp"
+            android:id="@+id/current_city"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@android:color/white"
-            android:text="35"
+            android:text="Sofia"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp" />
-        <TextView
-            android:id="@+id/min_temp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" />
+        <RelativeLayout
+            android:id="@+id/current_data"
             android:layout_width="wrap_content"
-            android:textColor="@android:color/background_dark"
-            android:text="/7"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp" />
-      </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_city"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:id="@+id/current_temp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="27"
+                android:textSize="80sp"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/weather_phrase"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Sunny"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/current_temp"
+                android:layout_marginTop="5dp" />
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/weather_phrase"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:id="@+id/max_temp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="35"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:id="@+id/min_temp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    android:text="/7"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hourly_forecast_list"
+            android:scrollbars="none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_data" />
+        <WeatherApp.Views.NotScrollableGridView
+            android:id="@+id/daily_forecast_list"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_below="@id/hourly_forecast_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fastScrollEnabled="true" />
+        <RelativeLayout
+            android:id="@+id/comfort_level_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/daily_forecast_list">
+          <TextView
+                android:id="@+id/comfort_level_section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:text="Comfort level" />
+          <TextView
+                android:id="@+id/humidity_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/comfort_level_section"
+                android:text="Humidity" />
+            <WeatherApp.Custom.Circle
+                android:id="@+id/humidity_circle"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_below="@+id/humidity_title"/>
+            <TextView
+                android:id="@+id/humidity_number"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:layout_marginLeft="59dp"
+                android:layout_below="@+id/humidity_title"
+                android:textColor="@android:color/white" />
+            <TextView
+                    android:id="@+id/circle_zero"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginLeft="55dp"
+                    android:textColor="@android:color/white"
+                    android:layout_below="@+id/comfort_level_section"
+                    android:text="0" />
+            <TextView
+                android:id="@+id/feels_like_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/humidity_circle"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="21dp"
+                android:textColor="@android:color/black"
+                android:text="Feels Like" />
+            <TextView
+                android:id="@+id/feels_like_value"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/feels_like_title"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="24dp"
+                android:textColor="@android:color/white"
+                android:text="16" />
+            <TextView
+                android:id="@+id/uv_index_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/feels_like_title"
+                android:layout_toRightOf="@+id/humidity_circle"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="21dp"
+                android:textColor="@android:color/black"
+                android:text="UV Index" />
+            <TextView
+                android:id="@+id/uv_index_value"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/uv_index_title"
+                android:layout_marginTop="85dp"
+                android:layout_marginLeft="31dp"
+                android:textColor="@android:color/white"
+                android:text="4 Moderate" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/windmills_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comfort_level_layout"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/wind_section"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                android:text="Wind" />
+            <ImageView
+                android:id="@+id/windmill_big_top"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp" />
+            <ImageView
+                android:id="@+id/windmill_big_bottom"
+                android:layout_width="30dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="91dp"
+                android:layout_marginLeft="44dp" />
+            <ImageView
+                android:id="@+id/windmill_small_top"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="73dp" />
+            <ImageView
+                android:id="@+id/windmill_small_bottom"
+                android:layout_width="25dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="106dp"
+                android:layout_marginLeft="95dp" />
+            <TextView
+                android:id="@+id/wind_direction_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/windmill_small_top"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@android:color/black"
+                android:text="Direction" />
+            <TextView
+                android:id="@+id/wind_direction"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/wind_direction_title"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@android:color/white"
+                android:text="North-east" />
+            <TextView
+                android:id="@+id/wind_speed_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wind_direction_title"
+                android:layout_toRightOf="@+id/windmill_small_top"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@android:color/black"
+                android:text="Speed" />
+            <TextView
+                android:id="@+id/wind_speed"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/wind_speed_title"
+                android:layout_marginTop="85dp"
+                android:layout_marginLeft="46dp"
+                android:textColor="@android:color/white"
+                android:text="12km/h" />
+        </RelativeLayout>
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hourly_forecast_list"
-        android:scrollbars="none"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/current_data"/>
-    <WeatherApp.Views.NotScrollableGridView
-        android:id="@+id/daily_forecast_list"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_below="@id/hourly_forecast_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fastScrollEnabled="true" />
-
-    <RelativeLayout
-    android:id="@+id/comfort_level_layout"
-    android:layout_width="wrap_content"
-   android:layout_height="wrap_content"
-    android:layout_below="@+id/daily_forecast_list">
-      <WeatherApp.Custom.Circle
-          android:id="@+id/humidity_circle"
-          android:layout_width="130dp"
-          android:layout_height="130dp"
-          android:layout_marginLeft="30dp"
-          android:layout_marginTop="40dp"/>
-      <TextView
-          android:id="@+id/humidity_number"
-          android:textAppearance="?android:attr/textAppearanceLarge"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="80dp"
-          android:layout_marginLeft="70dp"
-          android:textColor="@android:color/white"/>
-      <TextView
-          android:id="@+id/feels_like_title"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/humidity_circle"
-          android:layout_marginTop="60dp"
-          android:layout_marginLeft="30dp"
-          android:textColor="@android:color/black"
-          android:text="Feels Like" />
-      <TextView
-          android:id="@+id/feels_like_value"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/feels_like_title"
-          android:layout_marginTop="60dp"
-          android:layout_marginLeft="11dp"
-          android:textColor="@android:color/white"
-          android:text="16" />
-      <TextView
-          android:id="@+id/uv_index_title"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/feels_like_title"
-          android:layout_toRightOf="@+id/humidity_circle"
-          android:layout_marginTop="5dp"
-          android:layout_marginLeft="30dp"
-          android:textColor="@android:color/black"
-          android:text="UV Index" />
-      <TextView
-          android:id="@+id/uv_index_value"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/uv_index_title"
-          android:layout_marginTop="85dp"
-          android:layout_marginLeft="20dp"
-          android:textColor="@android:color/white"
-          android:text="4 Moderate" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/windmills_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/comfort_level_layout"
-        android:layout_marginTop="10dp">
-      <TextView
-          android:id="@+id/wind_section"
-          android:textAppearance="?android:attr/textAppearanceMedium"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="10dp"
-          android:textColor="@android:color/white"
-          android:text="Wind" />
-      <ImageView
-          android:id="@+id/windmill_big_top"
-          android:layout_width="100dp"
-          android:layout_height="100dp"
-          android:layout_marginTop="30dp"
-          android:layout_marginLeft="30dp" />
-      <ImageView
-          android:id="@+id/windmill_big_bottom"
-          android:layout_width="30dp"
-          android:layout_height="70dp"
-          android:layout_marginTop="81dp"
-          android:layout_marginLeft="64dp" />
-      <ImageView
-          android:id="@+id/windmill_small_top"
-          android:layout_width="70dp"
-          android:layout_height="70dp"
-          android:layout_marginTop="60dp"
-          android:layout_marginLeft="93dp" />
-      <ImageView
-          android:id="@+id/windmill_small_bottom"
-          android:layout_width="25dp"
-          android:layout_height="55dp"
-          android:layout_marginTop="96dp"
-          android:layout_marginLeft="115dp" />
-      <TextView
-          android:id="@+id/wind_direction_title"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/windmill_small_top"
-          android:layout_marginTop="60dp"
-          android:layout_marginLeft="30dp"
-          android:textColor="@android:color/black"
-          android:text="Direction" />
-      <TextView
-          android:id="@+id/wind_direction"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/wind_direction_title"
-          android:layout_marginTop="60dp"
-          android:layout_marginLeft="30dp"
-          android:textColor="@android:color/white"
-          android:text="North-east" />
-      <TextView
-          android:id="@+id/wind_speed_title"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/wind_direction_title"
-          android:layout_toRightOf="@+id/windmill_small_top"
-          android:layout_marginTop="5dp"
-          android:layout_marginLeft="30dp"
-          android:textColor="@android:color/black"
-          android:text="Speed" />
-      <TextView
-          android:id="@+id/wind_speed"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/wind_speed_title"
-          android:layout_marginTop="85dp"
-          android:layout_marginLeft="46dp"
-          android:textColor="@android:color/white"
-          android:text="12km/h" />
-    </RelativeLayout>
-  </RelativeLayout>
 </ScrollView>
