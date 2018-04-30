@@ -13,6 +13,7 @@ using Android.Views.Animations;
 using Android.Content;
 using WeatherApp.Custom;
 using Android.Animation;
+using Android.Views;
 
 namespace WeatherApp
 {
@@ -33,7 +34,6 @@ namespace WeatherApp
         RecyclerView hourlyForecastList;
         RecyclerView.LayoutManager hfLayoutManager;
         HourlyForecastCollection hfCollection;
-        HourlyAdapter hfAdapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -79,17 +79,34 @@ namespace WeatherApp
             animation2.Duration = 4000;
             windmillSmallTop.StartAnimation(animation2);
 
-            Circle circle = FindViewById<Circle>(Resource.Id.circle);
+            Circle circle = FindViewById<Circle>(Resource.Id.humidity_circle);
 
             CircleAngleAnimation circleAnimation = new CircleAngleAnimation(circle, 300);
             circleAnimation.Duration = 4000;
             circle.StartAnimation(circleAnimation);
 
-            percentageIncrease = FindViewById<TextView>(Resource.Id.increasing_percentage);
+            percentageIncrease = FindViewById<TextView>(Resource.Id.humidity_number);
             StartCountAnimation();
+
+            dailyForecastList.Touch += (o, e) =>
+            {
+                circle.StartAnimation(circleAnimation);
+            };
+
+            mainLayout.Touch += (o, e) =>
+            {
+                circle.StartAnimation(circleAnimation);
+            };
+
+            circle.Touch += (o, e) =>
+            {
+                circle.StartAnimation(circleAnimation);
+                StartCountAnimation();
+            };
+
+
             SetBackgroundImage();
         }
-
 
         private void StartCountAnimation()
         {
