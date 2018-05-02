@@ -7,11 +7,19 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
   <TextView
+      android:id="@+id/daily_forecast_degrees_min"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/whiteF"
+      android:layout_alignParentRight="true"/>
+  <TextView
       android:id="@+id/daily_forecast_degrees"
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"/>
+      android:textColor="@android:color/white"
+      android:layout_toLeftOf="@id/daily_forecast_degrees_min"/>
   <ImageView
       android:id="@+id/daily_forecast_image"
       android:layout_width="wrap_content"
@@ -24,5 +32,6 @@
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:textColor="@android:color/white"
       android:layout_toLeftOf="@id/daily_forecast_image"/>
 </RelativeLayout>

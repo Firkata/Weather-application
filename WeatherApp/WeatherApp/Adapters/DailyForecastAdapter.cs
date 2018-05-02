@@ -11,6 +11,8 @@ namespace WeatherApp.Adapters
         public TextView Date { get; set; }
         public ImageView Image { get; set; }
         public TextView Degrees { get; set; }
+
+        public TextView DegreesMin { get; set; }
     }
 
     public class DailyForecastAdapter : BaseAdapter
@@ -49,10 +51,12 @@ namespace WeatherApp.Adapters
             var date = view.FindViewById<TextView>(Resource.Id.daily_forecast_date);
             var image = view.FindViewById<ImageView>(Resource.Id.daily_forecast_image);
             var degrees = view.FindViewById<TextView>(Resource.Id.daily_forecast_degrees);
+            var degreesMin = view.FindViewById<TextView>(Resource.Id.daily_forecast_degrees_min);
 
             date.Text = dailyForecast[position].Date;
             image.SetImageResource(dailyForecast[position].ImageResource);
             degrees.Text = dailyForecast[position].Degrees;
+            degreesMin.Text = dailyForecast[position].DegreesMin;
 
             return view;
         }
