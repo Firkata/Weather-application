@@ -6,7 +6,6 @@
         public string Date { get; set; }
         public int ImageResource { get; set; }
         public string Degrees { get; set; }
-
         public string DegreesMin { get; set; }
     }
 }
