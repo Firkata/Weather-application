@@ -3,8 +3,9 @@
 
   <color name="blueF">#004d87</color>
   <color name="blackF">#000000</color>
+  <color name="whiteF">#80FFFFFF</color>
 
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <item name="android:windowTranslucentStatus">true</item>
     <item name="android:windowTranslucentNavigation">true</item>
   </style>

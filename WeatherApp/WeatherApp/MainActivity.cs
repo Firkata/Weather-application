@@ -15,6 +15,7 @@ using WeatherApp.Custom;
 using Android.Animation;
 using Android.Views;
 using System.Text.RegularExpressions;
+using Android.Graphics;
 
 namespace WeatherApp
 {
@@ -208,10 +209,6 @@ namespace WeatherApp
                     dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
                         fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
                         CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
-
-                    //dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                    //    19 + i,
-                    //    "April");
                 }
                 else
                 {
@@ -219,27 +216,11 @@ namespace WeatherApp
                     fiveDaysForecast.DailyForecasts[i].Date.Date.DayOfWeek,
                     fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
                     CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
-
-                    //dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                    //    19 + i,
-                    //    "April");
                 }
 
                 dailyForecast.ImageResource = ImagePicker(fiveDaysForecast.DailyForecasts[i].Day.LongPhrase);
-
-                //dailyForecast.ImageResource = Resource.Drawable.clouds;
-
-                dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
-                    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Maximum.Value),
-                    "\u00B0",
-                    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Minimum.Value),
-                    "\u00B0");
-
-                //dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
-                //    20 + i,
-                //    "\u00B0",
-                //    7 + i,
-                //    "\u00B0");
+                dailyForecast.DegreesMin = "/" + Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Minimum.Value) + "\u00B0";
+                dailyForecast.Degrees = Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Maximum.Value) + "\u00B0";
 
                 list.Add(dailyForecast);
             };
@@ -250,10 +231,14 @@ namespace WeatherApp
         void SetBackgroundImage()
         {
             if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour <= 19)
+            {
                 mainLayout.SetBackgroundResource(Resource.Drawable.sunny_sky);
+            }
             else
+            {
                 mainLayout.SetBackgroundResource(Resource.Drawable.night);
-            //mainLayout.SetBackgroundResource(Resource.Drawable.sunny_sky);
+            }
+            mainLayout.SetBackgroundResource(Resource.Drawable.night);
         }
     }
 }
