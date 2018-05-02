@@ -29,7 +29,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="27"
                 android:textSize="80sp"
                 android:layout_centerHorizontal="true" />
             <TextView
@@ -37,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="Sunny"
                 android:textSize="20sp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/current_temp"
@@ -85,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/daily_forecast_list">
-          <TextView
+            <TextView
                 android:id="@+id/comfort_level_section"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
@@ -94,7 +92,7 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="@android:color/white"
                 android:text="Comfort level" />
-          <TextView
+            <TextView
                 android:id="@+id/humidity_title"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
@@ -110,7 +108,7 @@
                 android:layout_height="130dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="3dp"
-                android:layout_below="@+id/humidity_title"/>
+                android:layout_below="@+id/humidity_title" />
             <TextView
                 android:id="@+id/humidity_number"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -121,15 +119,15 @@
                 android:layout_below="@+id/humidity_title"
                 android:textColor="@android:color/white" />
             <TextView
-                    android:id="@+id/circle_zero"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="140dp"
-                    android:layout_marginLeft="55dp"
-                    android:textColor="@android:color/white"
-                    android:layout_below="@+id/comfort_level_section"
-                    android:text="0" />
+                android:id="@+id/circle_zero"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
+                android:layout_marginLeft="55dp"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/comfort_level_section"
+                android:text="0" />
             <TextView
                 android:id="@+id/feels_like_title"
                 android:textAppearance="?android:attr/textAppearanceSmall"

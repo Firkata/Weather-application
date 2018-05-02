@@ -107,7 +107,10 @@
     <Compile Include="Common\HourlyForecast.cs" />
     <Compile Include="Custom\Circle.cs" />
     <Compile Include="Custom\CircleAngleAnimation.cs" />
+    <Compile Include="Models\AirAndPollen.cs" />
+    <Compile Include="Models\DailyTemperature.cs" />
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\DewPoint.cs" />
     <Compile Include="Models\Direction.cs" />
     <Compile Include="Models\Maximum.cs" />
     <Compile Include="Models\Maximum2.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\HourlyForecastModel.cs" />
     <Compile Include="Models\Temperature.cs" />
+    <Compile Include="Models\WetBulbTemperature.cs" />
     <Compile Include="Models\Wind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -137,6 +141,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\drawable\night.jpg" />
+    <AndroidResource Include="Resources\drawable\sunny_sky.jpg" />
     <AndroidResource Include="Resources\layout\list_view_daily_forecast.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -164,12 +170,6 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\sunny_sky.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\night.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\sunny.png" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +194,27 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\appicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\sunclouds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\storm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\nightrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cloudnight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\clearnight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\snow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

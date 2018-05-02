@@ -13,6 +13,8 @@ namespace WeatherApp.Common
         public bool IsDaylight { get; set; }
         public Temperature Temperature { get; set; }
         public RealFeelTemperature RealFeelTemperature { get; set; }
+        public WetBulbTemperature WetBulbTemperature { get; set; }
+        public DewPoint DewPoint { get; set; }
         public Wind Wind { get; set; }
         public int RelativeHumidity { get; set; }
         public int UVIndex { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using WeatherApp.Models;
 
@@ -9,8 +10,13 @@ namespace WeatherApp.Common
         public DateTime Date { get; set; }
         public int EpochDate { get; set; }
         public Sun Sun { get; set; }
-        public Moon Moon { get; set; }
-        public Temperature Temperature { get; set; }
+        //public Moon Moon { get; set; }
+        //public Temperature Temperature { get; set; }
+
+        [JsonProperty(PropertyName = "Temperature")]
+        public DailyTemperature Temperature { get; set; }
+
+        //public AirAndPollen AirAndPollen { get; set; }
         public RealFeelTemperature RealFeelTemperature { get; set; }
         public double HoursOfSun { get; set; }
         public Day Day { get; set; }
