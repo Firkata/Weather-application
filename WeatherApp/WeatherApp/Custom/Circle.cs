@@ -22,7 +22,7 @@ namespace WeatherApp.Custom
             paint.AntiAlias = true;
             paint.SetStyle(Paint.Style.Stroke);
             paint.StrokeWidth = strokeWidth;
-            paint.Color = Color.Gray;
+            paint.Color = Color.White;
 
             //size 200x200 example
             rect = new RectF(strokeWidth, strokeWidth, 300 + strokeWidth, 300 + strokeWidth);

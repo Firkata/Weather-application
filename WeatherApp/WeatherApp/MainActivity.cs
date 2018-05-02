@@ -14,6 +14,7 @@ using Android.Content;
 using WeatherApp.Custom;
 using Android.Animation;
 using Android.Views;
+using System.Text.RegularExpressions;
 
 namespace WeatherApp
 {
@@ -43,8 +44,8 @@ namespace WeatherApp
             SetContentView(Resource.Layout.Main);
             //ActionBar.Hide();
             DataExtractor extractor = new DataExtractor();
-            //var fiveDaysForecast = extractor.FiveDayForecast();
             var halfDayForecast = extractor.HalfDayForecast();
+            var fiveDaysForecast = extractor.FiveDayForecast();
             windmillBigTop = FindViewById<ImageView>(Resource.Id.windmill_big_top);
             windmillBigBottom = FindViewById<ImageView>(Resource.Id.windmill_big_bottom);
             windmillSmallTop = FindViewById<ImageView>(Resource.Id.windmill_small_top);
@@ -60,17 +61,17 @@ namespace WeatherApp
             hfLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.Horizontal, false);
             hourlyForecastList.SetLayoutManager(hfLayoutManager);
             hourlyForecastList.SetAdapter(new HourlyAdapter(hfCollection));
-            dailyForecastList.Adapter = new DailyForecastAdapter(this, FiveDayForecast());
+            dailyForecastList.Adapter = new DailyForecastAdapter(this, FiveDayForecast(fiveDaysForecast));
 
             windmillBigTop.SetImageResource(Resource.Drawable.windmill_top);
             windmillBigBottom.SetImageResource(Resource.Drawable.windmill_bottom);
             windmillSmallTop.SetImageResource(Resource.Drawable.windmill_top);
             windmillSmallBottom.SetImageResource(Resource.Drawable.windmill_bottom);
 
-            currentTemp.Text = " 27" + "\u00B0";
-            maxTemp.Text = "35" + "\u00B0";
-            minTemp.Text = "/" + "7" + "\u00B0";
-            weatherPhrase.Text = "Sunny";
+            currentTemp.Text = " " + Math.Round(halfDayForecast[0].Temperature.Value) + "\u00B0";
+            maxTemp.Text = Math.Round(halfDayForecast[0].RealFeelTemperature.Value) + "\u00B0";
+            minTemp.Text = "/" + Math.Round(halfDayForecast[0].DewPoint.Value) + "\u00B0";
+            weatherPhrase.Text = halfDayForecast[0].IconPhrase;
 
             var animation = AnimationUtils.LoadAnimation(Android.App.Application.Context, Resource.Animation.rotate_animation);
             animation.Duration = 4000;
@@ -79,14 +80,18 @@ namespace WeatherApp
             animation2.Duration = 4000;
             windmillSmallTop.StartAnimation(animation2);
 
+            //var humidityPercentage = fiveDaysForecast.DailyForecasts[0].AirAndPollen.Value;
+            //var circleDegrees = Convert.ToInt32(3.6 * humidityPercentage);
+
             Circle circle = FindViewById<Circle>(Resource.Id.humidity_circle);
 
             CircleAngleAnimation circleAnimation = new CircleAngleAnimation(circle, 300);
             circleAnimation.Duration = 4000;
             circle.StartAnimation(circleAnimation);
 
+            
             percentageIncrease = FindViewById<TextView>(Resource.Id.humidity_number);
-            StartCountAnimation();
+            StartCountAnimation(82);
 
             dailyForecastList.Touch += (o, e) =>
             {
@@ -101,16 +106,16 @@ namespace WeatherApp
             circle.Touch += (o, e) =>
             {
                 circle.StartAnimation(circleAnimation);
-                StartCountAnimation();
+                StartCountAnimation(82);
             };
 
 
             SetBackgroundImage();
         }
 
-        private void StartCountAnimation()
+        private void StartCountAnimation(int humidityPercentage)
         {
-            ValueAnimator animator = ValueAnimator.OfInt(0, 600);
+            ValueAnimator animator = ValueAnimator.OfInt(0, humidityPercentage);
             animator.SetDuration(4000);
             animator.Start();
             animator.Update += (object sender, ValueAnimator.AnimatorUpdateEventArgs e) =>
@@ -118,6 +123,58 @@ namespace WeatherApp
                 int newValue = (int)e.Animation.AnimatedValue;
                 percentageIncrease.Text = Convert.ToString(newValue) + "%";
             };
+        }
+
+        private int ImagePicker(string phrase, int hour = 12)
+        {
+            if (Regex.IsMatch(phrase, @"\b(mostly|partly|sunny)\b", RegexOptions.IgnoreCase))
+            {
+                return Resource.Drawable.sunny;
+            }
+            else if(Regex.IsMatch(phrase, @"\b(mostly|partly|cloudy)\b", RegexOptions.IgnoreCase))
+            {
+                if(hour>6 && hour<19)
+                    return Resource.Drawable.sunclouds;
+                else
+                    return Resource.Drawable.cloudnight;
+            }
+            else if(Regex.IsMatch(phrase, @"\b(intermittent|clouds)\b", RegexOptions.IgnoreCase))
+            {
+                if (hour > 6 && hour < 19)
+                    return Resource.Drawable.clouds;
+                else
+                    return Resource.Drawable.cloudnight;
+            }
+            else if (Regex.IsMatch(phrase, @"\b(storm|thunderstorm)\b", RegexOptions.IgnoreCase))
+            {
+                return Resource.Drawable.storm;
+            }
+            else if (Regex.IsMatch(phrase, @"\b(rain|rainy)\b", RegexOptions.IgnoreCase))
+            {
+                if (hour > 6 && hour < 19)
+                    return Resource.Drawable.rain;
+                else
+                    return Resource.Drawable.nightrain;
+            }
+            else if (Regex.IsMatch(phrase, @"\b(snow|snowy)\b", RegexOptions.IgnoreCase))
+            {
+                return Resource.Drawable.snow;
+            }
+            else if (Regex.IsMatch(phrase, @"\b(clear)\b", RegexOptions.IgnoreCase))
+            {
+                if (hour > 6 && hour < 19)
+                    return Resource.Drawable.sunny;
+                else
+                    return Resource.Drawable.clearnight;
+            }
+            else
+            {
+                if (hour > 6 && hour < 19)
+                    return Resource.Drawable.sunny;
+                else
+                    return Resource.Drawable.clearnight;
+            }
+
         }
 
         private List<HourlyForecastModel> HalfDayForecast(List<HourlyForecast> halfDayForecast)
@@ -129,7 +186,7 @@ namespace WeatherApp
 
                 hourlyForecast.Id = i;
                 hourlyForecast.Hour = halfDayForecast[i].DateTime.Hour + ":00";
-                hourlyForecast.ImageResource = Resource.Drawable.clouds;
+                hourlyForecast.ImageResource = ImagePicker(halfDayForecast[i].IconPhrase, halfDayForecast[i].DateTime.Hour);
                 hourlyForecast.Degrees = string.Format("{0}{1}", Math.Round(halfDayForecast[i].Temperature.Value).ToString(),"\u00B0");
 
                 list.Add(hourlyForecast);
@@ -137,7 +194,7 @@ namespace WeatherApp
             return list;
         }
 
-        private List<DailyForecastModel> FiveDayForecast()//(DailyForecast fiveDaysForecast)
+        private List<DailyForecastModel> FiveDayForecast(DailyForecast fiveDaysForecast)
         {
             List<DailyForecastModel> list = new List<DailyForecastModel>();
 
@@ -148,49 +205,41 @@ namespace WeatherApp
                 dailyForecast.Id = i;
                 if (i == 1)
                 {
-                    //dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                    //    fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
-                    //    CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
-
                     dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                        19 + i,
-                        "April");
+                        fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
+                        CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
+
+                    //dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
+                    //    19 + i,
+                    //    "April");
                 }
                 else
                 {
-                    //dailyForecast.Date = string.Format("{0}, {1} {2}",
-                    //fiveDaysForecast.DailyForecasts[i].Date.Date.DayOfWeek,
-                    //fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
-                    //CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
+                    dailyForecast.Date = string.Format("{0}, {1} {2}",
+                    fiveDaysForecast.DailyForecasts[i].Date.Date.DayOfWeek,
+                    fiveDaysForecast.DailyForecasts[i].Date.Date.Day,
+                    CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(fiveDaysForecast.DailyForecasts[i].Date.Date.Month));
 
-                    dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
-                        19 + i,
-                        "April");
+                    //dailyForecast.Date = string.Format("Tomorrow, {0} {1}",
+                    //    19 + i,
+                    //    "April");
                 }
 
-                //if (fiveDaysForecast.DailyForecasts[i].Day.LongPhrase.Contains("cloud") &&
-                //    fiveDaysForecast.DailyForecasts[i].Day.LongPhrase.Contains("sun"))
-                //{
-                //    dailyForecast.ImageResource = Resource.Drawable.clouds;
-                //}
-                //else if (fiveDaysForecast.DailyForecasts[i].Day.ShortPhrase.Contains("sun"))
-                //{
-                //    dailyForecast.ImageResource = Resource.Drawable.sunny;
-                //}
+                dailyForecast.ImageResource = ImagePicker(fiveDaysForecast.DailyForecasts[i].Day.LongPhrase);
 
-                dailyForecast.ImageResource = Resource.Drawable.clouds;
-
-                //dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
-                //    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Maximum.Value),
-                //    "\u00B0",
-                //    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Minimum.Value),
-                //    "\u00B0");
+                //dailyForecast.ImageResource = Resource.Drawable.clouds;
 
                 dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
-                    20 + i,
+                    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Maximum.Value),
                     "\u00B0",
-                    7 + i,
+                    Math.Ceiling(fiveDaysForecast.DailyForecasts[i].Temperature.Minimum.Value),
                     "\u00B0");
+
+                //dailyForecast.Degrees = string.Format("{0}{1} /{2}{3}",
+                //    20 + i,
+                //    "\u00B0",
+                //    7 + i,
+                //    "\u00B0");
 
                 list.Add(dailyForecast);
             };
@@ -204,7 +253,7 @@ namespace WeatherApp
                 mainLayout.SetBackgroundResource(Resource.Drawable.sunny_sky);
             else
                 mainLayout.SetBackgroundResource(Resource.Drawable.night);
-            mainLayout.SetBackgroundResource(Resource.Drawable.sunny_sky);
+            //mainLayout.SetBackgroundResource(Resource.Drawable.sunny_sky);
         }
     }
 }
