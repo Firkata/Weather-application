@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/whiteF"
+                android:textColor="@android:color/white"
                 android:layout_below="@+id/comfort_level_section"
                 android:text="Humidity" />
             <WeatherApp.Custom.Circle
@@ -134,7 +134,7 @@
                 android:layout_toRightOf="@+id/humidity_circle"
                 android:layout_marginTop="60dp"
                 android:layout_marginLeft="21dp"
-                android:textColor="@color/whiteF"
+                android:textColor="@android:color/white"
                 android:text="Feels Like" />
             <TextView
                 android:id="@+id/feels_like_value"
@@ -154,7 +154,7 @@
                 android:layout_toRightOf="@+id/humidity_circle"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="21dp"
-                android:textColor="@color/whiteF"
+                android:textColor="@android:color/white"
                 android:text="UV Index" />
             <TextView
                 android:id="@+id/uv_index_value"
@@ -217,7 +217,7 @@
                 android:layout_toRightOf="@+id/windmill_small_top"
                 android:layout_marginTop="60dp"
                 android:layout_marginLeft="30dp"
-                android:textColor="@color/whiteF"
+                android:textColor="@android:color/white"
                 android:text="Direction" />
             <TextView
                 android:id="@+id/wind_direction"
@@ -237,7 +237,7 @@
                 android:layout_toRightOf="@+id/windmill_small_top"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
-                android:textColor="@color/whiteF"
+                android:textColor="@android:color/white"
                 android:text="Speed" />
             <TextView
                 android:id="@+id/wind_speed"

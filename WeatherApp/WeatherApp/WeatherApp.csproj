@@ -103,10 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\DailyForecastAdapter.cs" />
+    <Compile Include="Helper\ConnectionHelper.cs" />
     <Compile Include="Common\DailyForecast.cs" />
     <Compile Include="Common\HourlyForecast.cs" />
     <Compile Include="Custom\Circle.cs" />
     <Compile Include="Custom\CircleAngleAnimation.cs" />
+    <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="ModelsAPI\AirAndPollen.cs" />
     <Compile Include="ModelsAPI\DailyTemperature.cs" />
     <Compile Include="ModelsAPI\Day.cs" />
