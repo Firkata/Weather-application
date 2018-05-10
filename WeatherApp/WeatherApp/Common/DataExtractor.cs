@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-using ModernHttpClient;
-using System.Net;
+﻿using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 

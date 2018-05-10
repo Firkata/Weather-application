@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\DailyForecastAdapter.cs" />
+    <Compile Include="Adapters\HourlyForecastAdapter.cs" />
     <Compile Include="Helper\ConnectionHelper.cs" />
     <Compile Include="Common\DailyForecast.cs" />
     <Compile Include="Common\HourlyForecast.cs" />
